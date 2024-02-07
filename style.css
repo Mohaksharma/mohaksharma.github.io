@@ -15,11 +15,31 @@ h1{
   font-size: 18px;
   font-family: 'Courier New', Courier, monospace;
 }
+.message {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.instagram-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff9999; /* Lighter red */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+font-family: Arial, sans-serif;
+}
+
+.instagram-link:hover {
+  background-color: #ff6666; /* Darker red on hover */
+}
 p{
   text-align: justify;
   margin-left: 250px;
   font-family: 'Courier New', Courier, monospace;
-  color: aqua;
+  color: white;
 
 }
 .rose {
