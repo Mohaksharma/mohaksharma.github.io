@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shining Rainbow Stars</title>
+    <style>
+        body {
+            background-color: #000;  /* Black background */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            text-align: center;
+        }
+
+        .star {
+            font-size: 2em;
+            display: inline-block;
+            padding: 0.2em;
+            color: white;  /* Will be overridden by random color */
+            animation: shine 2s ease-in-out infinite, fadeIn 0.3s ease forwards;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        .message {
+            font-size: 2.5em;
+            color: #ff1e56;
+            font-weight: bold;
+            animation: fadeIn 0.3s ease forwards, glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes shine {
+            0% {
+                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+            }
+            100% {
+                filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(255, 30, 86, 0.7), 0 0 10px rgba(255, 30, 86, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 30, 86, 1), 0 0 30px rgba(255, 30, 86, 0.8);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container"></div>
+
+    <script>
+        const container = document.getElementById('container');
+        let i = 1;
+
+        // Define a wide range of colors for the stars
+        const colors = [
+            '#FF5733', '#33FF57', '#3357FF', '#F0FF33', '#FF33F0', '#33FFF0', '#F033FF', 
+            '#FF6F61', '#6B5B95', '#88B04B', '#F7CAC9', '#92A8D1', '#955251', '#B565A7', 
+            '#009688', '#FF9800', '#673AB7', '#3F51B5', '#2196F3', '#FFEB3B', '#4CAF50'
+        ];
+
+        // Function to generate random spaces
+        function generateRandomSpaces() {
+            const count = Math.floor(Math.random() * 100) + 1;
+            return '&nbsp;'.repeat(count);  // Create random spaces
+        }
+
+        // Function to get a random color from the colors array
+        function getRandomColor() {
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Function to display the next star or message
+        function displayNextSymbol() {
+            const element = document.createElement('p');
+            element.className = (i % 10 === 0) ? 'message' : 'star';
+
+            if (i % 10 === 0) {
+                element.innerHTML = generateRandomSpaces() + 'mine?';  // Display "mine?" message
+            } else {
+                element.innerHTML = generateRandomSpaces() + '*';  // Display a star
+                element.style.color = getRandomColor();  // Apply random color to the star
+            }
+
+            container.appendChild(element);
+
+            // Scroll the page down to the latest message
+            window.scrollTo(0, document.body.scrollHeight);
+
+            i++;
+            if (i <= 1000) {  // Limit the loop to 1000 iterations
+                setTimeout(displayNextSymbol, 300);  // Set delay between each new line
+            }
+        }
+
+        // Start the process
+        displayNextSymbol();
+    </script>
+</body>
+</html>
